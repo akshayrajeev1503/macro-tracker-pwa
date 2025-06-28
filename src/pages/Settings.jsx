@@ -1,13 +1,13 @@
 // src/pages/Settings.jsx
 import React from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import GeminiKeyManager from '../components/Auth/GeminiKeyManager';
-import GeminiModelSelector from '../components/Auth/GeminiModelSelector';
-import OpenAIKeyManager from '../components/Auth/OpenAIKeyManager';
-import OpenAIModelSelector from '../components/Auth/OpenAIModelSelector';
 
 export default function Settings() {
   const [provider, setProvider] = useLocalStorage('AI_PROVIDER', 'gemini');
+  const [geminiKey, setGeminiKey] = useLocalStorage('GEMINI_API_KEY', '');
+  const [geminiModel, setGeminiModel] = useLocalStorage('GEMINI_MODEL', 'gemini-2.5-pro');
+  const [openAIKey, setOpenAIKey] = useLocalStorage('OPENAI_API_KEY', '');
+  const [openAIModel, setOpenAIModel] = useLocalStorage('OPENAI_MODEL', 'gpt-4o');
 
   return (
     <div>
@@ -23,13 +23,53 @@ export default function Settings() {
 
       {provider === 'gemini' ? (
         <>
-          <GeminiKeyManager required />
-          <GeminiModelSelector />
+          <label>
+            Gemini API Key:
+            <input
+              type="text"
+              value={geminiKey}
+              onChange={e => setGeminiKey(e.target.value)}
+              placeholder="Enter Gemini API Key"
+              required
+              style={{ width: '100%' }}
+            />
+          </label>
+          <br />
+          <label>
+            Gemini Model:
+            <input
+              type="text"
+              value={geminiModel}
+              onChange={e => setGeminiModel(e.target.value)}
+              placeholder="e.g. gemini-2.5-pro"
+              style={{ width: '100%' }}
+            />
+          </label>
         </>
       ) : (
         <>
-          <OpenAIKeyManager required />
-          <OpenAIModelSelector />
+          <label>
+            OpenAI API Key:
+            <input
+              type="text"
+              value={openAIKey}
+              onChange={e => setOpenAIKey(e.target.value)}
+              placeholder="Enter OpenAI API Key"
+              required
+              style={{ width: '100%' }}
+            />
+          </label>
+          <br />
+          <label>
+            OpenAI Model:
+            <input
+              type="text"
+              value={openAIModel}
+              onChange={e => setOpenAIModel(e.target.value)}
+              placeholder="e.g. gpt-4o"
+              style={{ width: '100%' }}
+            />
+          </label>
         </>
       )}
 
