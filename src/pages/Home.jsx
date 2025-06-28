@@ -23,11 +23,13 @@ export default function Home() {
         String(now.getDate()).padStart(2, '0'),
       ].join('-');
       const macroInput = { image: photo, description };
-      //const macros = await getMacros({ image: photo, description });
+      let macros = null;
       try {
-        const macros = await getMacros({ image: photo, description });
+        macros = await getMacros({ image: photo, description });
       } catch (e) {
         alert(e.message); // e.g., "OpenAI API key is required..."
+        setProcessing(false);
+        return;
       }
       addEntry(dateKey, { image: photo, macros });
       alert('Saved for ' + dateKey);
