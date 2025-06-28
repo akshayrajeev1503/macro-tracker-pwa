@@ -16,7 +16,7 @@ export default function OpenAIKeyManager({ required }) {
 
   return (
     <div>
-      <h3>Gemini API Key {required && '*'}</h3>
+      <h3>OpenAI API Key {required && '*'}</h3>
       <input
         type="password"
         value={temp}

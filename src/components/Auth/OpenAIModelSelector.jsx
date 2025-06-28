@@ -11,7 +11,7 @@ export default function OpenAIModelSelector() {
 
   return (
     <div>
-      <h3>Gemini Model</h3>
+      <h3>OpenAI Model</h3>
       <select value={model} onChange={e => setModel(e.target.value)}>
         {MODELS.map(m => (
           <option key={m} value={m}>{m}</option>

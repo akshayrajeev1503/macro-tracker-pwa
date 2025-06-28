@@ -6,7 +6,7 @@ import { openAIClient, geminiClient } from './aiClients';
 export const AIContext = createContext();
 
 export default function AIProvider({ children }) {
-  const [provider] = useLocalStorage('AI_PROVIDER', 'openai');
+  const [provider] = useLocalStorage('AI_PROVIDER', 'gemini');
   const [openAIKey] = useLocalStorage('OPENAI_API_KEY');
   const [openAIModel] = useLocalStorage('OPENAI_MODEL', 'gpt-4o');
   const [geminiKey] = useLocalStorage('GEMINI_API_KEY');
@@ -14,10 +14,8 @@ export default function AIProvider({ children }) {
 
   const client = useMemo(() => {
     if (provider === 'openai') {
-      if (!openAIKey) throw new Error('OpenAI API key is required for OpenAI provider');
-      return openAIClient(openAIKey, openAIModel);
+      return openAIClient(openAIKey, openAIModel); // Key not required yet
     } else {
-      if (!geminiKey) throw new Error('Gemini API key is required for Gemini provider');
       return geminiClient(geminiKey, geminiModel);
     }
   }, [provider, openAIKey, openAIModel, geminiKey, geminiModel]);
